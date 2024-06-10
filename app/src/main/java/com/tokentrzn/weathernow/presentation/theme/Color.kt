@@ -1,5 +1,8 @@
-package com.tokentrzn.weathernow.ui.theme
+package com.tokentrzn.weathernow.presentation.theme
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Brush.Companion.linearGradient
 import androidx.compose.ui.graphics.Color
 
 val Purple80 = Color(0xFFD0BCFF)
@@ -20,3 +23,13 @@ val AccentColor = Color(0xFF03A9F4)
 val PrimaryTextColor = Color(0xFF212121)
 val SecondaryTextColor = Color(0xFF757575)
 val DividerColor = Color(0xFFBDBDBD)
+
+@Composable
+fun LinearGradient(): Brush {
+    return linearGradient(
+        colors = listOf(
+            DarkPrimaryColor,
+            LightPrimaryColor
+        )
+    )
+}

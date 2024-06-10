@@ -1,4 +1,4 @@
-package com.tokentrzn.weathernow.ui.theme
+package com.tokentrzn.weathernow.presentation.theme
 
 import android.app.Activity
 import android.os.Build
