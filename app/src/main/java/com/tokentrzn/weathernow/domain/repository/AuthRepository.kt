@@ -5,6 +5,7 @@ import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 
 interface AuthRepository {
     val currentUser : FirebaseUser?
-    suspend fun login(email:String, password :String) : FirebaseResponse<FirebaseUser>
-    //suspend fun register(name: String, city: String, email: String, password: String, confirmPassword: String) : FirebaseResponse<FirebaseUser>
+    suspend fun login(email:String, password :String) : FirebaseResponse<FirebaseUser?>
+    suspend fun register(email:String, password :String) : FirebaseResponse<FirebaseUser?>
+    suspend fun sendPasswordResetEmail(email: String): FirebaseResponse<FirebaseUser?>
 }

@@ -32,6 +32,6 @@ fun RegisterScreen(navController: NavController) {
             Box(modifier = Modifier
                 .padding(contentPadding)) { RegisterContent() }
         }
-        Register()
+        Register(navController)
     }
 }

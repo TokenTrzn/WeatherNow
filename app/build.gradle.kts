@@ -1,10 +1,13 @@
-
+import java.util.Properties
+import java.io.FileInputStream
+import java.io.IOException
 
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id ("kotlin-kapt")
     id("com.google.dagger.hilt.android")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -14,7 +17,7 @@ android {
     defaultConfig {
         applicationId = "com.tokentrzn.weathernow"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -22,6 +25,8 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField("String", "OPENWEATHERMAP_API_KEY", "\"${getApiKey()}\"")
     }
 
     buildTypes {
@@ -42,6 +47,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -86,6 +92,12 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    //CORUTINES
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.2")
+
+    //LIVEDATA
+    implementation("androidx.compose.runtime:runtime-livedata:1.0.0")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -93,4 +105,14 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+}
+
+fun getApiKey(): String {
+    val properties = Properties()
+    try {
+        properties.load(FileInputStream(rootProject.file("local.properties")))
+    } catch (e: IOException) {
+        e.printStackTrace()
+    }
+    return properties.getProperty("OPENWEATHERMAP_API_KEY")
 }

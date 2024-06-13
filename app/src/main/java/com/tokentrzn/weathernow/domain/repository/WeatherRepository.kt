@@ -1,8 +1,9 @@
 package com.tokentrzn.weathernow.domain.repository
 
+import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.domain.model.WeatherResponse
-import retrofit2.Call
 
 interface WeatherRepository {
-    fun getCurrentWeather(cityName: String, apiKey: String): Call<WeatherResponse>
+    suspend fun getCurrentWeather(city: String, apiKey: String): FirebaseResponse<WeatherResponse?>
+    suspend fun getWeatherUseCases(city: String, apiKey: String): FirebaseResponse<WeatherResponse?>
 }

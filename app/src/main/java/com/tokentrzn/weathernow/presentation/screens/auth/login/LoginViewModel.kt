@@ -28,7 +28,7 @@ class LoginViewModel @Inject constructor(private val authUseCases: AuthUseCases)
     var isEnabledLoginButton = false
 
     //RESPONSES
-    var loginResponse by mutableStateOf<FirebaseResponse<FirebaseUser>?>(null)
+    var loginResponse by mutableStateOf<FirebaseResponse<FirebaseUser?>?>(null)
 
     // CURRENT USER
     val currentUser = authUseCases.getCurrentUser()

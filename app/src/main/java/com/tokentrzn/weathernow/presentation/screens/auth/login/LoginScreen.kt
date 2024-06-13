@@ -32,8 +32,8 @@ fun LoginScreen(navController: NavController){
                 contentPadding ->
             // Screen content
             Box(modifier = Modifier
-                .padding(contentPadding)) { LoginContent() }
+                .padding(contentPadding)) { LoginContent(navController) }
         }
-        Login()
+        Login(navController)
     }
 }

@@ -25,14 +25,16 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
 import com.tokentrzn.weathernow.R
 import com.tokentrzn.weathernow.presentation.components.DefaultButton
 import com.tokentrzn.weathernow.presentation.components.DefaultTextField
+import com.tokentrzn.weathernow.presentation.navigation.Screen
 import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginViewModel
 import com.tokentrzn.weathernow.presentation.theme.PrimaryTextColor
 
 @Composable
-fun LoginContent( viewModel: LoginViewModel = hiltViewModel()) {
+fun LoginContent( navController: NavController, viewModel: LoginViewModel = hiltViewModel() ) {
 
     Box(
         modifier = Modifier
@@ -87,7 +89,7 @@ fun LoginContent( viewModel: LoginViewModel = hiltViewModel()) {
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(end = 64.dp)
-                    .clickable { },
+                    .clickable { navController.navigate(Screen.ForgotPassword.route) },
                 style = TextStyle(
                     fontSize = 10.sp,
                     fontWeight = FontWeight.Bold,

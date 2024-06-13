@@ -15,8 +15,18 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val authUseCases: AuthUseCases): ViewModel(){
+    // State
     var state by mutableStateOf(RegisterState())
         private set
+
+    // Response
+    var registerResponse by mutableStateOf<FirebaseResponse<FirebaseUser?>?>(null)
+
+    fun register() = viewModelScope.launch {
+        registerResponse = FirebaseResponse.Loading
+        val result = authUseCases.register(state.email, state.password)
+        registerResponse = result
+    }
 
     //VALIDATIONS
     var isEmailValid by mutableStateOf(false)
@@ -29,16 +39,6 @@ class RegisterViewModel @Inject constructor(private val authUseCases: AuthUseCas
 
     var isEnabledRegisterButton = false
 
-    //RESPONSES
-    var registerResponse by mutableStateOf<FirebaseResponse<FirebaseUser>?>(null)
-
-    /*
-    fun register() = viewModelScope.launch {
-        registerResponse = FirebaseResponse.Loading
-        val result = authUseCases.register(state.name, state.city, state.email, state.password, state.confirmPassword)
-        registerResponse = result
-    }
-     */
     fun validateEmail(){
         if(Patterns.EMAIL_ADDRESS.matcher(state.email).matches()){
             isEmailValid=true
