@@ -1,5 +1,8 @@
-package com.tokentrzn.weathernow.presentation.screens.home
+package com.tokentrzn.weathernow.presentation.screens.main.home
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,12 +16,15 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.Response
 import javax.inject.Inject
 
 @HiltViewModel
-class WeatherViewModel @Inject constructor(private val getCurrentWeather: GetCurrentWeather) : ViewModel() {
+class HomeViewModel @Inject constructor(private val getCurrentWeather: GetCurrentWeather) : ViewModel() {
 
     private val _weatherData = MutableLiveData<FirebaseResponse<WeatherResponse?>>()
+    var favLocation by mutableStateOf<Response<Boolean>?>(null)
+    var disFavLocation by mutableStateOf<Response<Boolean>?>(null)
     val weatherData: LiveData<FirebaseResponse<WeatherResponse?>>
         get() = _weatherData
 
@@ -26,5 +32,9 @@ class WeatherViewModel @Inject constructor(private val getCurrentWeather: GetCur
         viewModelScope.launch {
             _weatherData.value = getCurrentWeather(cityName, apiKey)
         }
+    }
+
+    fun favLocation(idLocation: String, idUser: String) = viewModelScope.launch {
+
     }
 }

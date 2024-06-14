@@ -1,4 +1,4 @@
-package com.tokentrzn.weathernow.presentation.screens.home.components
+package com.tokentrzn.weathernow.presentation.screens.main.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -13,10 +13,10 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.tokentrzn.weathernow.presentation.screens.home.WeatherViewModel
+import com.tokentrzn.weathernow.presentation.screens.main.home.HomeViewModel
 
 @Composable
-fun HomeContent(viewModel: WeatherViewModel = hiltViewModel()) {
+fun HomeContent(viewModel: HomeViewModel = hiltViewModel()) {
 /*
 val weatherState = viewModel.weatherState.collectAsState().value
 

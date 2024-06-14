@@ -7,14 +7,15 @@ import androidx.navigation.compose.rememberNavController
 import com.tokentrzn.weathernow.presentation.screens.auth.forgotpassword.ForgotPasswordScreen
 import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginScreen
 import com.tokentrzn.weathernow.presentation.screens.auth.register.RegisterScreen
-import com.tokentrzn.weathernow.presentation.screens.home.HomeScreen
+import com.tokentrzn.weathernow.presentation.screens.main.home.HomeScreen
+import com.tokentrzn.weathernow.presentation.screens.main.settings.SettingsScreen
 
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.Login.route
+        startDestination = Screen.Home.route
     ) {
         composable(Screen.Login.route) {
             LoginScreen(navController)
@@ -23,10 +24,13 @@ fun Navigation() {
             RegisterScreen(navController)
         }
         composable(Screen.Home.route) {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(Screen.ForgotPassword.route) {
             ForgotPasswordScreen(navController)
+        }
+        composable(Screen.Settings.route) {
+            SettingsScreen(navController)
         }
     }
 }
@@ -36,4 +40,6 @@ sealed class Screen(val route: String) {
     object Register : Screen("RegisterScreen")
     object Home : Screen("HomeScreen")
     object ForgotPassword : Screen("ForgotPasswordScreen")
+
+    object Settings : Screen("SettingsScreen")
 }

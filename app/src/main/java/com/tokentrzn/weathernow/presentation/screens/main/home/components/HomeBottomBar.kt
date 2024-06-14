@@ -1,4 +1,4 @@
-package com.tokentrzn.weathernow.presentation.screens.home.components
+package com.tokentrzn.weathernow.presentation.screens.main.home.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,9 +25,8 @@ fun HomeBottomBar() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp)
             .background(PrimaryTextColor),
-        horizontalArrangement = Arrangement.Center,
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
         Box() {
