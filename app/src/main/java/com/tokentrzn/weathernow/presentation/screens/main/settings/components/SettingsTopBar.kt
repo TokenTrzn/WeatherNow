@@ -20,7 +20,6 @@ import com.tokentrzn.weathernow.presentation.theme.TextIconsColor
 
 @Composable
 fun SettingsTopBar(navController: NavController) {
-
     Row(
         modifier = Modifier
             .fillMaxWidth()

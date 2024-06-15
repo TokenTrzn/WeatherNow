@@ -8,6 +8,7 @@ import com.tokentrzn.weathernow.presentation.screens.auth.forgotpassword.ForgotP
 import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginScreen
 import com.tokentrzn.weathernow.presentation.screens.auth.register.RegisterScreen
 import com.tokentrzn.weathernow.presentation.screens.main.home.HomeScreen
+import com.tokentrzn.weathernow.presentation.screens.main.search.SearchScreen
 import com.tokentrzn.weathernow.presentation.screens.main.settings.SettingsScreen
 
 @Composable
@@ -32,6 +33,9 @@ fun Navigation() {
         composable(Screen.Settings.route) {
             SettingsScreen(navController)
         }
+        composable(Screen.Search.route) {
+            SearchScreen(navController)
+        }
     }
 }
 
@@ -40,6 +44,6 @@ sealed class Screen(val route: String) {
     object Register : Screen("RegisterScreen")
     object Home : Screen("HomeScreen")
     object ForgotPassword : Screen("ForgotPasswordScreen")
-
     object Settings : Screen("SettingsScreen")
+    object Search : Screen("SearchScreen")
 }

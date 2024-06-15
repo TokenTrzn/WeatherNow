@@ -21,6 +21,7 @@ fun SettingsContent() {
                 .padding(12.dp)
         ) {
             SettingToggleButton(title = "Notificaciones")
+            SettingToggleButton(title = "")
         }
     }
 

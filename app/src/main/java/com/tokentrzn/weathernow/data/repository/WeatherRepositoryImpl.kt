@@ -1,6 +1,7 @@
 package com.tokentrzn.weathernow.data.repository
 
 import com.tokentrzn.weathernow.data.api.APIClient
+import com.tokentrzn.weathernow.domain.model.City
 import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.domain.model.WeatherResponse
 import com.tokentrzn.weathernow.domain.repository.WeatherRepository
@@ -27,5 +28,9 @@ class WeatherRepositoryImpl @Inject constructor(private val apiService: APIClien
         apiKey: String
     ): FirebaseResponse<WeatherResponse?> {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun getCity(city: String): String {
+        return ""
     }
 }

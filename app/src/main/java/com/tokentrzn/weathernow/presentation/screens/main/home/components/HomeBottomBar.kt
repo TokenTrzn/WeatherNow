@@ -34,18 +34,6 @@ fun HomeBottomBar() {
                 onClick = { /* Handle action */ }
             ) {
                 Icon(
-                    imageVector = Icons.Filled.Home,
-                    contentDescription = "Home",
-                    tint = TextIconsColor
-                )
-            }
-        }
-
-        Box() {
-            IconButton(
-                onClick = { /* Handle action */ }
-            ) {
-                Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = "Search",
                     tint = TextIconsColor
