@@ -1,12 +1,19 @@
 package com.tokentrzn.weathernow.presentation.screens.auth.login
 
+import android.util.Log
 import android.util.Patterns
+import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.Firebase
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.auth
 import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.domain.use_cases.authentication.AuthUseCases
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,9 +22,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val authUseCases: AuthUseCases): ViewModel() {
+
     //STATES
     var state by mutableStateOf(LoginState())
         private set
+
+
 
     //VALIDATIONS
     var isEmailValid by mutableStateOf(false)
@@ -28,20 +38,44 @@ class LoginViewModel @Inject constructor(private val authUseCases: AuthUseCases)
     var isEnabledLoginButton = false
 
     //RESPONSES
-    var loginResponse by mutableStateOf<FirebaseResponse<FirebaseUser?>?>(null)
+    var loginResponse by mutableStateOf<FirebaseResponse<FirebaseUser>?>(null)
 
     // CURRENT USER
+
     val currentUser = authUseCases.getCurrentUser()
 
-    init{
+/*
+init{
         if(currentUser!= null){
             loginResponse = FirebaseResponse.Success(currentUser)
         }
     }
+ */
+
     fun login() = viewModelScope.launch {
         loginResponse = FirebaseResponse.Loading
         val result = authUseCases.login(state.email, state.password)
         loginResponse = result
+    }
+
+    //GOOGLE AUTH
+    private val auth: FirebaseAuth = Firebase.auth
+    fun loginWithGoogle(credential: AuthCredential, home: () -> Unit) = viewModelScope.launch {
+        try {
+            auth.signInWithCredential(credential)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                    Log.d("Usuario", "Logueado con Google")
+                    home()
+                    }
+                }
+                .addOnFailureListener {
+                    Log.d("Usuario", "Error")
+                }
+        } catch (e: Exception) {
+            Log.d("Usuario", "Excpecion: $e")
+        }
+
     }
     fun validateEmail(){
         if(Patterns.EMAIL_ADDRESS.matcher(state.email).matches()){
@@ -74,5 +108,9 @@ class LoginViewModel @Inject constructor(private val authUseCases: AuthUseCases)
 
     fun onPasswordInput(password:String){
         state = state.copy(password = password)
+    }
+
+    fun cleanTextFields() {
+        state = state.copy(email = "", password = "")
     }
 }

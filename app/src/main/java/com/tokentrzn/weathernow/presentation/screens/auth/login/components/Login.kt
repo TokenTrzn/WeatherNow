@@ -7,6 +7,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.presentation.components.DefaultProgressBar
+import com.tokentrzn.weathernow.presentation.navigation.Screen
 import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginViewModel
 
 
@@ -20,14 +21,11 @@ fun Login( navController: NavController, viewModel: LoginViewModel = hiltViewMod
         }
 
         is FirebaseResponse.Success -> {
-
-            Toast.makeText(
-                LocalContext.current, "Usuario loguedo correctamente",
-                Toast.LENGTH_LONG
-            ).show()
+            navController.navigate(Screen.Home.route)
         }
 
         is FirebaseResponse.Error -> {
+            viewModel.cleanTextFields()
             Toast.makeText(
                 LocalContext.current, "Usuario o contraseña incorrectos",
                 Toast.LENGTH_LONG

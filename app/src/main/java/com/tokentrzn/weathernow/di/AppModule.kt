@@ -1,6 +1,7 @@
 package com.tokentrzn.weathernow.di
 
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.tokentrzn.weathernow.BuildConfig.OPENWEATHERMAP_API_KEY
 import com.tokentrzn.weathernow.data.api.APIClient
 import com.tokentrzn.weathernow.data.repository.AuthRepositoryImpl
@@ -9,15 +10,19 @@ import com.tokentrzn.weathernow.domain.repository.AuthRepository
 import com.tokentrzn.weathernow.domain.repository.WeatherRepository
 import com.tokentrzn.weathernow.domain.use_cases.authentication.AuthUseCases
 import com.tokentrzn.weathernow.domain.use_cases.authentication.GetCurrentUser
+import com.tokentrzn.weathernow.domain.use_cases.authentication.GetCurrentUserUid
+import com.tokentrzn.weathernow.domain.use_cases.authentication.LogOut
 import com.tokentrzn.weathernow.domain.use_cases.authentication.Login
 import com.tokentrzn.weathernow.domain.use_cases.authentication.Register
 import com.tokentrzn.weathernow.domain.use_cases.authentication.SendPasswordResetEmail
 import com.tokentrzn.weathernow.domain.use_cases.weather.GetCurrentWeather
 import com.tokentrzn.weathernow.domain.use_cases.weather.GetWeatherUseCase
 import com.tokentrzn.weathernow.domain.use_cases.weather.WeatherUseCases
+import com.tokentrzn.weathernow.presentation.screens.main.profile.ProfileViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.scopes.ViewModelScoped
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -77,6 +82,10 @@ object AppModule {
     @Provides
     fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
 
+    @Provides
+    @Singleton
+    fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
+
     // Repositories
     @Provides
     fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
@@ -88,14 +97,14 @@ object AppModule {
 
     // UseCases
     @Provides
-    fun provideAuthUseCases(repository: AuthRepository): AuthUseCases {
-        return AuthUseCases(
-            getCurrentUser = GetCurrentUser(repository),
-            login = Login(repository),
-            register = Register(repository),
-            sendPasswordResetEmail = SendPasswordResetEmail(repository)
-        )
-    }
+    fun provideAuthUseCases(repository: AuthRepository) = AuthUseCases(
+        getCurrentUser = GetCurrentUser(repository),
+        getCurrentUserUid = GetCurrentUserUid(repository),
+        login = Login(repository),
+        register = Register(repository),
+        sendPasswordResetEmail = SendPasswordResetEmail(repository),
+        //logOut = LogOut(repository)
+    )
 
     @Provides
     fun provideWeatherUseCases(repository: WeatherRepository): WeatherUseCases {

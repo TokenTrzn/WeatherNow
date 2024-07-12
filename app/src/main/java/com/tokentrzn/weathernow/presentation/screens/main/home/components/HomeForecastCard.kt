@@ -25,6 +25,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tokentrzn.weathernow.R
+import com.tokentrzn.weathernow.presentation.theme.DarkTransparentColor
 
 @Composable
 fun HomeForecastCard() {
@@ -33,7 +34,7 @@ fun HomeForecastCard() {
             .fillMaxWidth()
             .padding(10.dp),
         shape = RoundedCornerShape(10.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0x88000000)),
+        colors = CardDefaults.cardColors(containerColor = DarkTransparentColor),
         content = {
             Column(
                 modifier = Modifier

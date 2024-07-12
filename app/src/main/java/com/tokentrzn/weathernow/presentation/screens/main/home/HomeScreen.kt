@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Settings
@@ -49,6 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.tokentrzn.weathernow.presentation.navigation.Screen
 import com.tokentrzn.weathernow.presentation.screens.main.home.components.HomeContentPreview
+import com.tokentrzn.weathernow.presentation.theme.DarkTransparentColor
 import com.tokentrzn.weathernow.presentation.theme.LinearGradient
 import com.tokentrzn.weathernow.presentation.theme.SecondaryTextColor
 import kotlinx.coroutines.CoroutineScope
@@ -77,7 +79,7 @@ fun HomeScreen(navController: NavController) {
         content = {
             Scaffold(
                 containerColor = Color.Transparent,
-                topBar = { MenuTopBar( drawerState = drawerState, scope = scope) },
+                topBar = { MenuTopBar( navController = navController, drawerState = drawerState, scope = scope) },
                 content = { contentPadding ->
                     Box(modifier = Modifier
                         .padding(contentPadding)) { HomeContentPreview() }
@@ -89,7 +91,7 @@ fun HomeScreen(navController: NavController) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MenuTopBar(drawerState: DrawerState, scope: CoroutineScope) {
+fun MenuTopBar(navController: NavController, drawerState: DrawerState, scope: CoroutineScope) {
     TopAppBar(
         title = {
             Box(
@@ -120,10 +122,10 @@ fun MenuTopBar(drawerState: DrawerState, scope: CoroutineScope) {
             }
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = Color(0x88000000),
+            containerColor = DarkTransparentColor,
             titleContentColor = Color.White
         ),
-        actions = { FavoriteButton() }
+        actions = { AddCityButton(navController) }
     )
 }
 
@@ -174,7 +176,7 @@ fun MenuContent(navController: NavController) {
         Text("Menú", fontSize = 26.sp, modifier = Modifier
             .padding(8.dp)
             .padding(bottom = 12.dp), fontWeight = FontWeight.Bold, color = Color.White)
-        MenuButton(navController = navController, route = Screen.Settings.route, icon = Icons.Default.Person, text = "Perfil")
+        MenuButton(navController = navController, route = Screen.Profile.route, icon = Icons.Default.Person, text = "Perfil")
         MenuDivider()
         MenuButton(navController = navController, route = Screen.Settings.route, icon = Icons.Default.StarBorder, text = "Favoritos")
         MenuDivider()
@@ -191,6 +193,21 @@ fun MenuDivider() {
             .height(1.dp)
 
     )
+}
+
+@Composable
+fun AddCityButton(navController: NavController) {
+    IconButton(
+        onClick = { navController.navigate(Screen.Search.route) },
+        modifier = Modifier
+            .padding(8.dp)
+    ) {
+        Icon(
+            imageVector = Icons.Default.Add,
+            contentDescription = "Add Icon",
+            tint = Color.White
+        )
+    }
 }
 
 @Composable

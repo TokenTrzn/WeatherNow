@@ -23,6 +23,8 @@ val AccentColor = Color(0xFF03A9F4)
 val PrimaryTextColor = Color(0xFF212121)
 val SecondaryTextColor = Color(0xFF757575)
 val DividerColor = Color(0xFFBDBDBD)
+val DarkTransparentColor = Color(0x88000000)
+val LightTransparentColor = Color(0x55000000)
 
 @Composable
 fun LinearGradient(): Brush {
@@ -30,6 +32,16 @@ fun LinearGradient(): Brush {
         colors = listOf(
             DarkPrimaryColor,
             LightPrimaryColor
+        )
+    )
+}
+
+@Composable
+fun DarkLinearGradient(): Brush {
+    return linearGradient(
+        colors = listOf(
+            DarkPrimaryColor,
+            AccentColor
         )
     )
 }

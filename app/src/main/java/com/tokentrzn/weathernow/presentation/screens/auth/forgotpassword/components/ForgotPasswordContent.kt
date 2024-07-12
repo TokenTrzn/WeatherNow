@@ -38,7 +38,9 @@ fun ForgotPasswordContent( viewModel: ForgotPasswordViewModel = hiltViewModel())
         Alignment.Center
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = 60.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
@@ -69,7 +71,7 @@ fun ForgotPasswordContent( viewModel: ForgotPasswordViewModel = hiltViewModel())
                 keyboardType = KeyboardType.Email,
                 errorMsg = viewModel.emailErrMsg,
                 validateField = { viewModel.validateEmail()
-                    viewModel.isEnabledSendEmailButton}
+                    viewModel.enabledSendEmailButton() }
             )
             Spacer(modifier = Modifier.size(4.dp))
             DefaultButton(
@@ -77,7 +79,7 @@ fun ForgotPasswordContent( viewModel: ForgotPasswordViewModel = hiltViewModel())
                     .fillMaxWidth()
                     .padding(horizontal = 56.dp),
                 text = "ENVIAR EMAIL",
-                onClick = { /* viewModel.sendPasswordRecoveryEmail() */ },
+                onClick = { viewModel.sendPasswordRecoveryEmail(viewModel.state.email) },
                 enabled = viewModel.isEnabledSendEmailButton
             )
         }

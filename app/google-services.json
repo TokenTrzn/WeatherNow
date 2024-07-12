@@ -12,7 +12,20 @@
           "package_name": "com.tokentrzn.weathernow"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "771325904491-kc8l1u5gr901m34ndtdp21nrcsq6489b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tokentrzn.weathernow",
+            "certificate_hash": "b6845caef757d1b7a3988b72a11d2c40155b22d5"
+          }
+        },
+        {
+          "client_id": "771325904491-aumtjbvenruhkmdjfeho9iel7kul9gel.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCguP17o7BstdKCK2DvkQeRVD4las6bwAg"
@@ -20,7 +33,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771325904491-aumtjbvenruhkmdjfeho9iel7kul9gel.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -48,6 +48,7 @@ android {
     buildFeatures {
         compose = true
         buildConfig = true
+        viewBinding = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = "1.4.3"
@@ -80,6 +81,7 @@ dependencies {
     implementation ("androidx.hilt:hilt-navigation-compose:1.1.0")
     implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
     implementation("com.google.firebase:firebase-auth:22.3.1")
+    implementation("com.google.firebase:firebase-firestore-ktx:25.0.0")
     kapt("com.google.dagger:hilt-android-compiler:2.48.1")
 
     //ICONS LIBRARY
@@ -99,6 +101,16 @@ dependencies {
 
     //LIVEDATA
     implementation("androidx.compose.runtime:runtime-livedata:1.0.0")
+
+    //MOSHi (JSON parsing library)
+    implementation ("com.squareup.moshi:moshi:1.12.0")
+
+    implementation ("com.google.maps.android:maps-compose:4.4.1")
+    implementation ("com.google.android.gms:play-services-maps:19.0.0")
+
+    implementation ("com.google.code.gson:gson:2.8.6")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

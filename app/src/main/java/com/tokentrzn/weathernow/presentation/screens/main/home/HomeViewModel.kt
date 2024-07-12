@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tokentrzn.weathernow.di.RetrofitInstance
 import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.domain.model.WeatherResponse
 import com.tokentrzn.weathernow.domain.use_cases.weather.GetCurrentWeather
@@ -22,19 +23,4 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val getCurrentWeather: GetCurrentWeather) : ViewModel() {
 
-    private val _weatherData = MutableLiveData<FirebaseResponse<WeatherResponse?>>()
-    var favLocation by mutableStateOf<Response<Boolean>?>(null)
-    var disFavLocation by mutableStateOf<Response<Boolean>?>(null)
-    val weatherData: LiveData<FirebaseResponse<WeatherResponse?>>
-        get() = _weatherData
-
-    fun fetchWeather(cityName: String, apiKey: String) {
-        viewModelScope.launch {
-            _weatherData.value = getCurrentWeather(cityName, apiKey)
-        }
-    }
-
-    fun favLocation(idLocation: String, idUser: String) = viewModelScope.launch {
-
-    }
 }

@@ -22,13 +22,16 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.presentation.components.DefaultButton
 import com.tokentrzn.weathernow.presentation.components.DefaultTextField
+import com.tokentrzn.weathernow.presentation.navigation.Screen
 import com.tokentrzn.weathernow.presentation.screens.auth.register.RegisterViewModel
 import com.tokentrzn.weathernow.presentation.theme.PrimaryTextColor
 
 @Composable
-fun RegisterContent( viewModel: RegisterViewModel = hiltViewModel()) {
+fun RegisterContent( navController: NavController, viewModel: RegisterViewModel = hiltViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
@@ -78,7 +81,7 @@ fun RegisterContent( viewModel: RegisterViewModel = hiltViewModel()) {
             Spacer(modifier = Modifier.size(4.dp))
             DefaultTextField(
                 modifier = Modifier.padding(top = 0.dp),
-                value =viewModel.state.password,
+                value = viewModel.state.password,
                 onValueChange = {viewModel.onPasswordInput(it)},
                 label = "Contraseña",
                 icon = Icons.Default.Lock,
@@ -92,7 +95,7 @@ fun RegisterContent( viewModel: RegisterViewModel = hiltViewModel()) {
             Spacer(modifier = Modifier.size(4.dp))
             DefaultTextField(
                 modifier = Modifier.padding(top = 0.dp),
-                value =viewModel.state.confirmPassword,
+                value = viewModel.state.confirmPassword,
                 onValueChange = {viewModel.onConfirmPasswordInput(it)},
                 label = "Confirmar Contraseña",
                 icon = Icons.Default.Lock,
@@ -109,9 +112,19 @@ fun RegisterContent( viewModel: RegisterViewModel = hiltViewModel()) {
                     .fillMaxWidth()
                     .padding(horizontal = 56.dp),
                 text = "REGISTER",
-                onClick = {  },
+                onClick = { viewModel.registerUser(viewModel.state.email, viewModel.state.password, viewModel.state.name, viewModel.state.city) },
                 enabled = viewModel.isEnabledRegisterButton
             )
+            /*
+            viewModel.registerResponse?.let {
+                when (it) {
+                    is FirebaseResponse.Success ->  navController.navigate(Screen.Login.route)
+                    is FirebaseResponse.Error -> Text("Registration Failed: ${it.exception?.message}")
+                    else -> Text("")
+                }
+            }
+             */
+
         }
     }
 }

@@ -14,6 +14,10 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -27,6 +31,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.tokentrzn.weathernow.R
+import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.presentation.components.DefaultButton
 import com.tokentrzn.weathernow.presentation.components.DefaultTextField
 import com.tokentrzn.weathernow.presentation.navigation.Screen
@@ -73,7 +78,7 @@ fun LoginContent( navController: NavController, viewModel: LoginViewModel = hilt
             Spacer(modifier = Modifier.size(4.dp))
             DefaultTextField(
                 modifier = Modifier.padding(top = 0.dp),
-                value =viewModel.state.password,
+                value = viewModel.state.password,
                 onValueChange = {viewModel.onPasswordInput(it)},
                 label = "Contraseña",
                 icon = Icons.Default.Lock,

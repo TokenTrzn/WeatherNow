@@ -8,6 +8,7 @@ import com.tokentrzn.weathernow.presentation.screens.auth.forgotpassword.ForgotP
 import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginScreen
 import com.tokentrzn.weathernow.presentation.screens.auth.register.RegisterScreen
 import com.tokentrzn.weathernow.presentation.screens.main.home.HomeScreen
+import com.tokentrzn.weathernow.presentation.screens.main.profile.ProfileScreen
 import com.tokentrzn.weathernow.presentation.screens.main.search.SearchScreen
 import com.tokentrzn.weathernow.presentation.screens.main.settings.SettingsScreen
 
@@ -16,7 +17,7 @@ fun Navigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route
+        startDestination = Screen.Login.route
     ) {
         composable(Screen.Login.route) {
             LoginScreen(navController)
@@ -36,6 +37,9 @@ fun Navigation() {
         composable(Screen.Search.route) {
             SearchScreen(navController)
         }
+        composable(Screen.Profile.route) {
+            ProfileScreen(navController)
+        }
     }
 }
 
@@ -46,4 +50,5 @@ sealed class Screen(val route: String) {
     object ForgotPassword : Screen("ForgotPasswordScreen")
     object Settings : Screen("SettingsScreen")
     object Search : Screen("SearchScreen")
+    object Profile: Screen("ProfileScreen")
 }

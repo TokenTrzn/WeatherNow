@@ -16,10 +16,10 @@ class WeatherRepositoryImpl @Inject constructor(private val apiService: APIClien
             if (response.isSuccessful) {
                 FirebaseResponse.Success(response.body())
             } else {
-                FirebaseResponse.Error("Error al obtener el clima: ${response.message()}")
+                FirebaseResponse.Error(Exception("Error al obtener el clima: ${response.message()}"))
             }
         } catch (e: Exception) {
-            FirebaseResponse.Error("Error al obtener el clima: ${e.message}")
+            FirebaseResponse.Error(e)
         }
     }
 
