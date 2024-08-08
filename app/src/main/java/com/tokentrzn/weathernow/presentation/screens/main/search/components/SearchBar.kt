@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun SearchBar() {
-    var city by remember { mutableStateOf(TextFieldValue("")) }
+    var city by remember { mutableStateOf("") }
     Column(
         modifier = Modifier
             .fillMaxWidth()

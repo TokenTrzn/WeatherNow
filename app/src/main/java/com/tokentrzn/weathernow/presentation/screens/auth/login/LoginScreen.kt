@@ -16,7 +16,6 @@ import com.tokentrzn.weathernow.presentation.screens.auth.login.components.Login
 import com.tokentrzn.weathernow.presentation.screens.auth.login.components.LoginTopBar
 import com.tokentrzn.weathernow.presentation.theme.LinearGradient
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LoginScreen(navController: NavController){
     Box(

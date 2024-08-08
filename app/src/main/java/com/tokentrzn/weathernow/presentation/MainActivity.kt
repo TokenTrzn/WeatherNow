@@ -8,7 +8,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.tokentrzn.weathernow.presentation.navigation.Navigation
-import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginScreen
 import com.tokentrzn.weathernow.presentation.theme.WeatherNowTheme
 import dagger.hilt.android.AndroidEntryPoint
 

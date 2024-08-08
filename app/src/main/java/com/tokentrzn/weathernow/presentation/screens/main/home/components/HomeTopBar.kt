@@ -23,6 +23,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,10 +36,12 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun HomeTopBar(navController: NavController) {
+
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .background(PrimaryTextColor),
+            .background(Color.Transparent)
+            .padding(top = 6.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

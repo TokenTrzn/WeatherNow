@@ -18,7 +18,7 @@ class ProfileViewModel @Inject constructor(private val authUseCases: AuthUseCase
     private val _logoutState = MutableStateFlow<LogoutState>(LogoutState.Idle)
     val logoutState: StateFlow<LogoutState> = _logoutState
 
-    /*
+
     fun logout() {
         viewModelScope.launch {
             _logoutState.value = LogoutState.Loading
@@ -30,14 +30,8 @@ class ProfileViewModel @Inject constructor(private val authUseCases: AuthUseCase
             }
         }
     }
-     */
+
 
 
 }
 
-sealed class LogoutState {
-    object Idle : LogoutState()
-    object Loading : LogoutState()
-    object Success : LogoutState()
-    data class Error(val message: String) : LogoutState()
-}

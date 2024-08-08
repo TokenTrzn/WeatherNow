@@ -20,12 +20,16 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.tokentrzn.weathernow.presentation.navigation.Screen
+import com.tokentrzn.weathernow.presentation.screens.main.home.HomeViewModel
 import com.tokentrzn.weathernow.presentation.screens.main.profile.ProfileViewModel
 
 @Composable
-fun ProfileButton(navController: NavController, route: String, icon: ImageVector, text: String) {
+fun ProfileButton(navController: NavController, route: String, icon: ImageVector, text: String, viewModel: HomeViewModel = hiltViewModel()) {
     Button(
-        onClick = { navController.navigate(Screen.Login.route) },
+        onClick = {
+            //viewModel.logout()
+            navController.navigate(Screen.Login.route)
+        },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = Color.White

@@ -79,8 +79,12 @@ object AppModule {
     }
      */
 // Firebase
+
     @Provides
-    fun provideFirebaseAuth(): FirebaseAuth = FirebaseAuth.getInstance()
+    @Singleton
+    fun provideFirebaseAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
+    }
 
     @Provides
     @Singleton
@@ -88,7 +92,10 @@ object AppModule {
 
     // Repositories
     @Provides
-    fun provideAuthRepository(impl: AuthRepositoryImpl): AuthRepository = impl
+    @Singleton
+    fun provideAuthRepository(firebaseAuth: FirebaseAuth): AuthRepository {
+        return AuthRepositoryImpl(firebaseAuth)
+    }
 
     @Provides
     fun provideWeatherRepository(apiClient: APIClient): WeatherRepository {
@@ -103,7 +110,7 @@ object AppModule {
         login = Login(repository),
         register = Register(repository),
         sendPasswordResetEmail = SendPasswordResetEmail(repository),
-        //logOut = LogOut(repository)
+        logOut = LogOut(repository)
     )
 
     @Provides
@@ -112,46 +119,5 @@ object AppModule {
             getCurrentWeather = GetCurrentWeather(repository),
             getWeatherUseCase = GetWeatherUseCase(repository)
         )
-    }
-
-    // Retrofit
-    @Provides
-    @Singleton
-    fun provideOkHttpClient(): OkHttpClient {
-        val interceptor = Interceptor { chain ->
-            val originalRequest = chain.request()
-            val originalHttpUrl = originalRequest.url()
-
-            val url = originalHttpUrl.newBuilder()
-                .addQueryParameter("units", "metric")
-                .addQueryParameter("appid", OPENWEATHERMAP_API_KEY)
-                .build()
-
-            val requestBuilder = originalRequest.newBuilder()
-                .url(url)
-
-            val request = requestBuilder.build()
-            chain.proceed(request)
-        }
-
-        return OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideRetrofit(client: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl("https://api.openweathermap.org/data/2.5/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(client)
-            .build()
-    }
-
-    @Provides
-    @Singleton
-    fun provideWeatherApiService(retrofit: Retrofit): APIClient {
-        return retrofit.create(APIClient::class.java)
     }
 }
