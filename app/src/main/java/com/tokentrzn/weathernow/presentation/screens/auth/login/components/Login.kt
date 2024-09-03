@@ -12,7 +12,7 @@ import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginViewModel
 
 
 @Composable
-fun Login( navController: NavController, viewModel: LoginViewModel = hiltViewModel()) {
+fun Login(navController: NavController, viewModel: LoginViewModel = hiltViewModel()) {
 
     when (viewModel.loginResponse) {
 
@@ -21,7 +21,7 @@ fun Login( navController: NavController, viewModel: LoginViewModel = hiltViewMod
         }
 
         is FirebaseResponse.Success -> {
-            navController.navigate(Screen.Home.route)
+            navController.navigate(Screen.Weather.route)
         }
 
         is FirebaseResponse.Error -> {
@@ -32,6 +32,11 @@ fun Login( navController: NavController, viewModel: LoginViewModel = hiltViewMod
             ).show()
         }
 
-        else -> {}
+        else -> {
+            Toast.makeText(
+                LocalContext.current, "Error inesperado",
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }

@@ -1,17 +1,28 @@
 package com.tokentrzn.weathernow.data.api
 
-import com.tokentrzn.weathernow.BuildConfig
-import com.tokentrzn.weathernow.data.model.ForecastResponse
-import com.tokentrzn.weathernow.util.DEFAULT_WEATHER_DESTINATION
-import com.tokentrzn.weathernow.util.NUMBER_OF_DAYS
+import com.tokentrzn.weathernow.data.model.WeatherResponse
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface APIClient {
-    @GET("forecast.json")
-    suspend fun getWeatherForecast(
-        @Query("key") key: String = BuildConfig.OPENWEATHERMAP_API_KEY,
-        @Query("q") city: String = DEFAULT_WEATHER_DESTINATION,
-        @Query("days") days: Int = NUMBER_OF_DAYS,
-    ): ForecastResponse
+    @GET("weather")
+    suspend fun getWeather(
+        @Query("q") city: String,
+        @Query("appid") apiKey: String,
+        @Query("units") unit: String = "metric",
+    ): WeatherResponse
+
+    companion object {
+        private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
+
+        fun create(): APIClient {
+            val retrofit = Retrofit.Builder()
+                .addConverterFactory(GsonConverterFactory.create())
+                .baseUrl(BASE_URL)
+                .build()
+            return retrofit.create(APIClient::class.java)
+        }
+    }
 }

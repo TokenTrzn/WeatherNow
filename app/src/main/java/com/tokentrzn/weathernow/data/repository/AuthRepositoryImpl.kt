@@ -56,14 +56,8 @@ class AuthRepositoryImpl @Inject constructor(private val firebaseAuth: FirebaseA
         }
     }
 
-
     override suspend fun logout() {
         firebaseAuth.signOut()
     }
-
-
-
-
-
 
 }

@@ -7,12 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.tokentrzn.weathernow.presentation.screens.auth.forgotpassword.ForgotPasswordScreen
 import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginScreen
 import com.tokentrzn.weathernow.presentation.screens.auth.register.RegisterScreen
-import com.tokentrzn.weathernow.presentation.screens.main.favourites.FavouritesScreen
-import com.tokentrzn.weathernow.presentation.screens.main.home.HomeScreen
-import com.tokentrzn.weathernow.presentation.screens.main.profile.ProfileScreen
-import com.tokentrzn.weathernow.presentation.screens.main.search.SearchScreen
-import com.tokentrzn.weathernow.presentation.screens.main.settings.SettingsScreen
-
+import com.tokentrzn.weathernow.presentation.screens.main.weather.WeatherScreen
 @Composable
 fun Navigation() {
     val navController = rememberNavController()
@@ -26,23 +21,11 @@ fun Navigation() {
         composable(Screen.Register.route) {
             RegisterScreen(navController)
         }
-        composable(Screen.Home.route) {
-            HomeScreen(navController)
+        composable(Screen.Weather.route) {
+            WeatherScreen(navController)
         }
         composable(Screen.ForgotPassword.route) {
             ForgotPasswordScreen(navController)
-        }
-        composable(Screen.Settings.route) {
-            SettingsScreen(navController)
-        }
-        composable(Screen.Search.route) {
-            SearchScreen(navController)
-        }
-        composable(Screen.Profile.route) {
-            ProfileScreen(navController)
-        }
-        composable(Screen.Favourites.route) {
-            FavouritesScreen()
         }
     }
 }
@@ -50,10 +33,6 @@ fun Navigation() {
 sealed class Screen(val route: String) {
     object Login : Screen("LoginScreen")
     object Register : Screen("RegisterScreen")
-    object Home : Screen("HomeScreen")
+    object Weather : Screen("WeatherScreen")
     object ForgotPassword : Screen("ForgotPasswordScreen")
-    object Settings : Screen("SettingsScreen")
-    object Search : Screen("SearchScreen")
-    object Profile: Screen("ProfileScreen")
-    object Favourites: Screen("FavouritesScreen")
 }

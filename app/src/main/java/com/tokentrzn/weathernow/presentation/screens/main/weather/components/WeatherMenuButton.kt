@@ -1,4 +1,4 @@
-package com.tokentrzn.weathernow.presentation.screens.main.home.components
+package com.tokentrzn.weathernow.presentation.screens.main.weather.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

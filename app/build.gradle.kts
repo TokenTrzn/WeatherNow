@@ -99,28 +99,9 @@ dependencies {
     //CORUTINES
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.5.2")
 
-    //LIVEDATA
-    implementation("androidx.compose.runtime:runtime-livedata:1.0.0")
-
-    //MOSHi (JSON parsing library)
-    implementation ("com.squareup.moshi:moshi:1.12.0")
-
-    implementation ("com.google.maps.android:maps-compose:4.4.1")
-    implementation ("com.google.android.gms:play-services-maps:19.0.0")
-
-    implementation ("com.google.code.gson:gson:2.8.6")
-
     //SERIALIZATION
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.3.0")
 
-    implementation ("com.squareup.okhttp3:okhttp:4.9.3")
-    implementation ("com.squareup.okhttp3:logging-interceptor:4.9.3")
-
-    implementation ("com.jakewharton.timber:timber:5.0.1")
-
-    //ANIMACIONES
-    implementation ("com.airbnb.android:lottie:6.4.1")
-    implementation ("com.airbnb.android:lottie-compose:6.4.1")
 
     implementation ("io.coil-kt:coil-compose:2.1.0")
 
