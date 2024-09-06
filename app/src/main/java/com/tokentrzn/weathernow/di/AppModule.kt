@@ -10,6 +10,7 @@ import com.tokentrzn.weathernow.domain.use_cases.authentication.GetCurrentUser
 import com.tokentrzn.weathernow.domain.use_cases.authentication.GetCurrentUserUid
 import com.tokentrzn.weathernow.domain.use_cases.authentication.LogOut
 import com.tokentrzn.weathernow.domain.use_cases.authentication.Login
+import com.tokentrzn.weathernow.domain.use_cases.authentication.LoginWithGoogle
 import com.tokentrzn.weathernow.domain.use_cases.authentication.Register
 import com.tokentrzn.weathernow.domain.use_cases.authentication.SendPasswordResetEmail
 import dagger.Module
@@ -49,7 +50,8 @@ object AppModule {
         login = Login(repository),
         register = Register(repository),
         sendPasswordResetEmail = SendPasswordResetEmail(repository),
-        logOut = LogOut(repository)
+        logOut = LogOut(repository),
+        loginWithGoogle = LoginWithGoogle(repository)
     )
 
     @Provides

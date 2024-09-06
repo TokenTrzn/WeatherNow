@@ -2,11 +2,9 @@ package com.tokentrzn.weathernow.presentation.screens.auth.login
 
 import android.util.Log
 import android.util.Patterns
-import android.widget.Toast
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.Firebase

@@ -33,10 +33,7 @@ fun Login(navController: NavController, viewModel: LoginViewModel = hiltViewMode
         }
 
         else -> {
-            Toast.makeText(
-                LocalContext.current, "Error inesperado",
-                Toast.LENGTH_LONG
-            ).show()
+
         }
     }
 }

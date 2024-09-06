@@ -1,8 +1,8 @@
 package com.tokentrzn.weathernow.data.repository
 
-import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.domain.repository.AuthRepository
 import kotlinx.coroutines.tasks.await
@@ -24,8 +24,9 @@ class AuthRepositoryImpl @Inject constructor(private val firebaseAuth: FirebaseA
     }
 
 
-    override suspend fun loginWithGoogle(credential: AuthCredential): FirebaseResponse<FirebaseUser> {
+    override suspend fun loginWithGoogle(idToken: String): FirebaseResponse<FirebaseUser> {
         return try {
+            val credential = GoogleAuthProvider.getCredential(idToken, null)
             val authResult = firebaseAuth.signInWithCredential(credential).await()
             FirebaseResponse.Success(authResult.user!!)
         } catch (e: Exception) {

@@ -8,7 +8,6 @@ import androidx.navigation.NavController
 import com.tokentrzn.weathernow.domain.model.FirebaseResponse
 import com.tokentrzn.weathernow.presentation.components.DefaultProgressBar
 import com.tokentrzn.weathernow.presentation.navigation.Screen
-import com.tokentrzn.weathernow.presentation.screens.auth.login.LoginViewModel
 import com.tokentrzn.weathernow.presentation.screens.auth.register.RegisterViewModel
 
 @Composable
@@ -20,10 +19,9 @@ fun Register(navController: NavController, viewModel: RegisterViewModel = hiltVi
             DefaultProgressBar()
         }
         is FirebaseResponse.Success -> {
-            // Solo navegar si el registro y el guardado en Firestore son exitosos
             if (response.data != null) {
-                // Aquí se debe guardar el usuario en Firestore
-                viewModel.registerUser(viewModel.state.email, viewModel.state.password, viewModel.state.name, viewModel.state.city)
+                Toast.makeText(context,"Usuario registrado correctamente", Toast.LENGTH_LONG).show()
+                viewModel.registerUser(viewModel.state.email, viewModel.state.password)
                 navController.navigate(Screen.Login.route)
             }
         }
@@ -35,6 +33,6 @@ fun Register(navController: NavController, viewModel: RegisterViewModel = hiltVi
                 Toast.LENGTH_LONG
             ).show()
         }
-        else -> { /* Otros casos */ }
+        else -> {  }
     }
 }

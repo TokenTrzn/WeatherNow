@@ -10,9 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavController
 import com.tokentrzn.weathernow.presentation.screens.auth.login.components.Login
-import com.tokentrzn.weathernow.presentation.screens.auth.login.components.LoginBottomBar
 import com.tokentrzn.weathernow.presentation.screens.auth.login.components.LoginContent
-import com.tokentrzn.weathernow.presentation.screens.auth.login.components.LoginTopBar
 import com.tokentrzn.weathernow.presentation.theme.LinearGradient
 
 @Composable
@@ -24,11 +22,8 @@ fun LoginScreen(navController: NavController){
     ){
         Scaffold (
             containerColor = Color.Transparent,
-            topBar = { LoginTopBar() },
-            bottomBar = { LoginBottomBar(navController) }
         ){
                 contentPadding ->
-            // Screen content
             Box(modifier = Modifier
                 .padding(contentPadding)) { LoginContent(navController) }
         }

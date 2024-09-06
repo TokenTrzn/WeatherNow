@@ -4,11 +4,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,11 +17,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tokentrzn.weathernow.presentation.theme.DarkPrimaryColor
 import com.tokentrzn.weathernow.presentation.theme.PrimaryTextColor
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DefaultTextField(
     modifier: Modifier,
@@ -36,6 +33,7 @@ fun DefaultTextField(
     errorMsg: String = "",
     enabled: Boolean = true,
     readOnly: Boolean = false,
+    keyboardOptions: KeyboardOptions,
 
     ) {
 
@@ -48,7 +46,7 @@ fun DefaultTextField(
                 validateField()
             },
             singleLine = true,
-            keyboardOptions = KeyboardOptions(keyboardType = keyboardType),
+            keyboardOptions = keyboardOptions,
             label = {
                 Text(
                     text = label,
@@ -65,17 +63,17 @@ fun DefaultTextField(
                 )
             },
             visualTransformation = if (hideText) PasswordVisualTransformation() else VisualTransformation.None,
-            colors = TextFieldDefaults.textFieldColors(
-                containerColor = Color.Transparent,
-                focusedLabelColor = DarkPrimaryColor,
-                disabledLabelColor = DarkPrimaryColor,
-                disabledTextColor = PrimaryTextColor,
-                unfocusedLabelColor = DarkPrimaryColor
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedTextColor = PrimaryTextColor,
+                unfocusedTextColor = PrimaryTextColor,
+                focusedBorderColor = PrimaryTextColor,
+                unfocusedBorderColor = PrimaryTextColor,
+                focusedPlaceholderColor = PrimaryTextColor,
+                unfocusedPlaceholderColor = PrimaryTextColor,
+                disabledPlaceholderColor = PrimaryTextColor
             ),
-
             enabled = enabled,
             readOnly = readOnly
-
         )
         Text(
             modifier = Modifier.padding(top = 2.dp),
@@ -84,6 +82,4 @@ fun DefaultTextField(
             color = Color.Red
         )
     }
-
-
 }

@@ -1,72 +1,60 @@
 package com.tokentrzn.weathernow.presentation.screens.auth.register.components
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.LocationCity
 import androidx.compose.material.icons.filled.Lock
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import com.tokentrzn.weathernow.domain.model.FirebaseResponse
+import com.tokentrzn.weathernow.R
 import com.tokentrzn.weathernow.presentation.components.DefaultButton
 import com.tokentrzn.weathernow.presentation.components.DefaultTextField
 import com.tokentrzn.weathernow.presentation.navigation.Screen
 import com.tokentrzn.weathernow.presentation.screens.auth.register.RegisterViewModel
-import com.tokentrzn.weathernow.presentation.theme.PrimaryTextColor
 
 @Composable
 fun RegisterContent( navController: NavController, viewModel: RegisterViewModel = hiltViewModel()) {
     Box(
         modifier = Modifier
             .fillMaxSize(),
-        Alignment.Center
+        Alignment.TopCenter
     ) {
         Column(
             modifier = Modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceEvenly
         ) {
+            Image(painter = painterResource(id = R.drawable.weather_app_icon_with_name),
+                modifier = Modifier.padding(40.dp),
+                contentDescription = "Weather Now icon with name"
+            )
+            Spacer(modifier = Modifier.height(100.dp))
             Text(
-                modifier = Modifier.padding(bottom = 100.dp),
-                text = "Crear una Cuenta Nueva",
-                style = MaterialTheme.typography.headlineMedium.copy(),
-                fontSize = 30.sp,
-                color = PrimaryTextColor,
-
-                )
-            DefaultTextField(
-                modifier = Modifier.padding(top = 8.dp),
-                value = viewModel.state.name,
-                onValueChange = { viewModel.onNameInput(it)},
-                label = "Nombre",
-                icon = Icons.Default.Person,
-                keyboardType = KeyboardType.Text,
+                text = "CREAR CUENTA NUEVA",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
             )
-            Spacer(modifier = Modifier.size(4.dp))
-            DefaultTextField(
-                modifier = Modifier.padding(top = 8.dp),
-                value = viewModel.state.city,
-                onValueChange = { viewModel.onCityInput(it)},
-                label = "Ciudad",
-                icon = Icons.Default.LocationCity,
-                keyboardType = KeyboardType.Text
-            )
-            Spacer(modifier = Modifier.size(4.dp))
+            Spacer(modifier = Modifier.height(20.dp))
             DefaultTextField(
                 modifier = Modifier.padding(top = 8.dp),
                 value = viewModel.state.email,
@@ -76,7 +64,8 @@ fun RegisterContent( navController: NavController, viewModel: RegisterViewModel 
                 keyboardType = KeyboardType.Email,
                 errorMsg = viewModel.emailErrMsg,
                 validateField = { viewModel.validateEmail()
-                    viewModel.enabledRegisterButton()}
+                    viewModel.enabledRegisterButton() },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
             )
             Spacer(modifier = Modifier.size(4.dp))
             DefaultTextField(
@@ -90,7 +79,8 @@ fun RegisterContent( navController: NavController, viewModel: RegisterViewModel 
                 validateField = {
                     viewModel.validatePassword()
                     viewModel.enabledRegisterButton()
-                }
+                },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next)
             )
             Spacer(modifier = Modifier.size(4.dp))
             DefaultTextField(
@@ -104,27 +94,22 @@ fun RegisterContent( navController: NavController, viewModel: RegisterViewModel 
                 validateField = {
                     viewModel.confirmPassword()
                     viewModel.enabledRegisterButton()
-                }
+                },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
             )
             Spacer(modifier = Modifier.size(16.dp))
             DefaultButton(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 56.dp),
-                text = "REGISTER",
-                onClick = { viewModel.registerUser(viewModel.state.email, viewModel.state.password, viewModel.state.name, viewModel.state.city) },
+                    .padding(horizontal = 56.dp)
+                    .padding(bottom = 20.dp),
+                text = "CREAR CUENTA",
+                onClick = {
+                    viewModel.registerUser(viewModel.state.email, viewModel.state.password)
+                    navController.navigate(Screen.Weather.route)
+                },
                 enabled = viewModel.isEnabledRegisterButton
             )
-            /*
-            viewModel.registerResponse?.let {
-                when (it) {
-                    is FirebaseResponse.Success ->  navController.navigate(Screen.Login.route)
-                    is FirebaseResponse.Error -> Text("Registration Failed: ${it.exception?.message}")
-                    else -> Text("")
-                }
-            }
-             */
-
         }
     }
 }

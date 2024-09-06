@@ -1,8 +1,6 @@
 package com.tokentrzn.weathernow.presentation.screens.auth.forgotpassword.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -10,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material3.Text
@@ -17,8 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -71,7 +70,8 @@ fun ForgotPasswordContent( viewModel: ForgotPasswordViewModel = hiltViewModel())
                 keyboardType = KeyboardType.Email,
                 errorMsg = viewModel.emailErrMsg,
                 validateField = { viewModel.validateEmail()
-                    viewModel.enabledSendEmailButton() }
+                    viewModel.enabledSendEmailButton() },
+                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done)
             )
             Spacer(modifier = Modifier.size(4.dp))
             DefaultButton(
@@ -79,7 +79,7 @@ fun ForgotPasswordContent( viewModel: ForgotPasswordViewModel = hiltViewModel())
                     .fillMaxWidth()
                     .padding(horizontal = 56.dp),
                 text = "ENVIAR EMAIL",
-                onClick = { viewModel.sendPasswordRecoveryEmail(viewModel.state.email) },
+                onClick = { /*viewModel.sendPasswordRecoveryEmail(viewModel.state.email) */ },
                 enabled = viewModel.isEnabledSendEmailButton
             )
         }

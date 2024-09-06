@@ -6,5 +6,6 @@ data class AuthUseCases(
     val login: Login,
     val register: Register,
     val sendPasswordResetEmail: SendPasswordResetEmail,
-    val logOut: LogOut
+    val logOut: LogOut,
+    val loginWithGoogle: LoginWithGoogle
 )

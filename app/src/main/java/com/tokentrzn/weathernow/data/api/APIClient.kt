@@ -1,6 +1,6 @@
 package com.tokentrzn.weathernow.data.api
 
-import com.tokentrzn.weathernow.data.model.WeatherResponse
+import com.tokentrzn.weathernow.domain.model.WeatherResponse
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -11,7 +11,8 @@ interface APIClient {
     suspend fun getWeather(
         @Query("q") city: String,
         @Query("appid") apiKey: String,
-        @Query("units") unit: String = "metric",
+        @Query("units") unit: String,
+        @Query("lang") lang: String = "es"
     ): WeatherResponse
 
     companion object {
